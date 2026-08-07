@@ -9,6 +9,15 @@ http:
   headers:
     - name: Content-Type
       value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "john@doe.com",
+        "password": "password123"
+      }
   auth: inherit
 
 settings:
