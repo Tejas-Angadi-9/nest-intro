@@ -7,13 +7,22 @@ import {
   Body,
   Headers,
   Ip,
+  ParseIntPipe,
+  DefaultValuePipe,
 } from '@nestjs/common';
 
 @Controller('users')
 class UsersController {
-  @Get('/:id{/:optional}')
-  public getUser(@Param('id') id: any, @Query('limit') limit: any) {
-    console.log({ limit });
+  @Get('{/:id}')
+  public getUser(
+    @Param('id', ParseIntPipe) id: number,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: any,
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: any,
+  ) {
+    // console.log({ limit, page });
+    console.log(id);
+    console.log(limit);
+    console.log(page);
 
     return `You sent a GET request to get user data ${id}`;
   }
