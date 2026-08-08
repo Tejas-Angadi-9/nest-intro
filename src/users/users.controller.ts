@@ -12,21 +12,21 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import CreateUserDto from './dtos/create-user.dto';
+import GetUsersParamDto from './dtos/get-users-param.dto';
 
 @Controller('users')
 class UsersController {
   @Get('{/:id}')
   public getUser(
-    @Param('id', ParseIntPipe) id: number,
+    @Param() getUsersParamDto: GetUsersParamDto,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: any,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: any,
   ) {
-    // console.log({ limit, page });
-    console.log(id);
+    console.log(getUsersParamDto);
     console.log(limit);
     console.log(page);
 
-    return `You sent a GET request to get user data ${id}`;
+    return 'You sent a GET request to get user data';
   }
 
   @Post()
@@ -37,7 +37,7 @@ class UsersController {
   ) {
     console.log('Headers: ', headers);
     console.log('IP: ', ip);
-    console.log(createUserDto instanceof CreateUserDto);
+    console.log(createUserDto);
     return 'You sent a POST request to create new user';
   }
 }
