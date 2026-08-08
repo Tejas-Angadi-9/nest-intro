@@ -31,13 +31,13 @@ class UsersController {
 
   @Post()
   public createUsers(
-    @Body(new ValidationPipe()) createUserDto: CreateUserDto,
+    @Body() createUserDto: CreateUserDto,
     @Headers() headers: any,
     @Ip() ip: any,
   ) {
     console.log('Headers: ', headers);
     console.log('IP: ', ip);
-    console.log(createUserDto);
+    console.log(createUserDto instanceof CreateUserDto);
     return 'You sent a POST request to create new user';
   }
 }
